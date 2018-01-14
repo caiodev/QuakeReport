@@ -33,7 +33,7 @@ class EarthquakeAdapter(context: Context, words: ArrayList<Earthquake>)
         placeTextView.text = currentEarthquakeValue.place
 
         val dateTextView = listItemView.date
-        dateTextView?.text = currentEarthquakeValue.date
+        dateTextView?.text = currentEarthquakeValue.date.toString()
 
         return listItemView
     }

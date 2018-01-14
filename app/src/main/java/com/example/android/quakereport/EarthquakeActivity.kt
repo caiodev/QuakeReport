@@ -8,6 +8,7 @@ class EarthquakeActivity : AppCompatActivity() {
 
     private val logTag = EarthquakeActivity::class.java.simpleName
     private var earthQuakes: ArrayList<Earthquake>? = null
+    private var queryUtilsObject: QueryUtils? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,14 +16,9 @@ class EarthquakeActivity : AppCompatActivity() {
 
         earthQuakes = ArrayList()
 
-        // Create a fake list of earthquake locations
-        earthQuakes!!.add(Earthquake(7.2, "San Andreas, California", "30/10/2017"))
-        earthQuakes!!.add(Earthquake(7.0, "San Diego, California", "30/10/2017"))
-        earthQuakes!!.add(Earthquake(6.8, "San Francisco, California", "30/10/2017"))
-        earthQuakes!!.add(Earthquake(8.5, "Los Angeles, California", "30/10/2017"))
-        earthQuakes!!.add(Earthquake(6.4, "Hollywood, California", "30/10/2017"))
-        earthQuakes!!.add(Earthquake(7.5, "Mountain View, California", "30/10/2017"))
-        earthQuakes!!.add(Earthquake(7.8, "Houston, Texas", "30/10/2017"))
+        // Cria uma lista falsa de earthquakes.
+        queryUtilsObject = QueryUtils()
+        earthQuakes = queryUtilsObject!!.extractEarthquakes()
 
         val earthQuakeAdapter = EarthquakeAdapter(applicationContext!!, earthQuakes!!)
 
