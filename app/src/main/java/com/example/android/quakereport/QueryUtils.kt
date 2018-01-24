@@ -1,21 +1,22 @@
 package com.example.android.quakereport
 
-import android.util.Log
 import org.json.JSONException
 import org.json.JSONObject
+import timber.log.Timber
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
  * Created by unknown on 07/01/18
  */
-class QueryUtils {
+class QueryUtils
 
-    /**
-     * Create a private constructor because no one should ever create a [QueryUtils] object.
-     * This class is only meant to hold static variables and methods, which can be accessed
-     * directly from the class name QueryUtils (and an object instance of QueryUtils is not needed).
-     */
-    internal constructor()
+/**
+ * Create a private constructor because no one should ever create a [QueryUtils] object.
+ * This class is only meant to hold static variables and methods, which can be accessed
+ * directly from the class name QueryUtils (and an object instance of QueryUtils is not needed).
+ */
+internal constructor() {
 
     /** Sample JSON response for a USGS query  */
     private val sampleJSONResponse =
@@ -45,10 +46,6 @@ class QueryUtils {
                     "\"properties\":{\"mag\":6,\"place\":\"Pacific-Antarctic Ridge\",\"time\":1451986454620,\"updated\":1459202978040,\"tz\":-540,\"url\":\"http://earthquake.usgs.gov/earthquakes/eventpage/us10004bgk\",\"detail\":\"http://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10004bgk&format=geojson\",\"felt\":0,\"cdi\":1,\"mmi\":0,\"alert\":\"green\",\"status\":\"reviewed\",\"tsunami\":0,\"sig\":554,\"net\":\"us\",\"code\":\"10004bgk\",\"ids\":\",us10004bgk,gcmt20160105093415,\",\"sources\":\",us,gcmt,\",\"types\":\",cap,dyfi,geoserve,losspager,moment-tensor,nearby-cities,origin,phase-data,shakemap,\",\"nst\":null,\"dmin\":30.75,\"rms\":0.67,\"gap\":71,\"magType\":\"mww\",\"type\":\"earthquake\",\"title\":\"M 6.0 - Pacific-Antarctic Ridge\"},\"geometry\":{\"type\":\"Point\",\"coordinates\":[-136.2603,-54.2906,10]},\"id\":\"us10004bgk\"}],\"bbox\":[-153.4051,-54.2906,10,158.5463,59.6363,582.56]" +
                     "}"
 
-    /**
-     * Return a list of [Earthquake] objects that has been built up from
-     * parsing a JSON response.
-     */
     fun extractEarthquakes(): ArrayList<Earthquake> {
 
         // Create an empty ArrayList that we can start adding earthquakes to
@@ -60,34 +57,31 @@ class QueryUtils {
         try {
 
             val rootJSON = JSONObject(sampleJSONResponse)
-            val sys = rootJSON.getJSONArray("features")
+            val featuresJSONArray = rootJSON.getJSONArray("features")
 
             for (i in 0..9) {
 
-                val properties = sys.getJSONObject(i).getJSONObject("properties")
+                val properties = featuresJSONArray.getJSONObject(i).getJSONObject("properties")
 
                 earthquakes.add(Earthquake(properties.getDouble("mag"), properties.getString("place"),
-                        properties.getLong("time")))
-
-                // long timeInMilliseconds = 1454124312220L;
-                // Date dateObject = new Date(timeInMilliseconds);
-                // SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM DD, yyyy");
-                // String dateToDisplay = dateFormatter.format(dateObject);
+                        convertToDate(properties.getLong("time"))))
             }
 
         } catch (e: JSONException) {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e)
+            Timber.tag("QueryUtils").e("Problem parsing the earthquake JSON results: %s",
+                    e.printStackTrace())
         }
 
         // Return the list of earthquakes
         return earthquakes
     }
-    /**
-     * Create a private constructor because no one should ever create a [QueryUtils] object.
-     * This class is only meant to hold static variables and methods, which can be accessed
-     * directly from the class name QueryUtils (and an object instance of QueryUtils is not needed).
-     */
+
+    fun convertToDate(timeInMilliseconds: Long): String {
+        val dateObject = Date(timeInMilliseconds)
+        val dateFormatter = SimpleDateFormat("MMM DD, yyyy", Locale.getDefault())
+        return dateFormatter.format(dateObject)
+    }
 }
