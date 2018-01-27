@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="earthquake_without_nearby_information_message">Proximidades desconhecidas</string>
+    <string name="of">de</string>
+</resources>

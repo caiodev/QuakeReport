@@ -25,17 +25,20 @@ android {
 ext {
     appCompatVersion = "27.0.2"
     junitVersion = "4.12"
-    kotlinVersion = "1.2.20"
+    kotlinVersion = "1.2.21"
     gsonVersion = "2.8.2"
     timberVersion = "4.6.0"
+    constraintLayoutVersion = "1.0.2"
 }
 
 dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile "junit:junit:$junitVersion"
     compile "com.android.support:appcompat-v7:$appCompatVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     compile "com.google.code.gson:gson:$gsonVersion"
+    compile "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
     implementation "com.jakewharton.timber:timber:$timberVersion"
 }
 

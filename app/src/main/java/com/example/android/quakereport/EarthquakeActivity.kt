@@ -6,7 +6,7 @@ import kotlinx.android.synthetic.main.earthquake_activity.*
 
 class EarthquakeActivity : AppCompatActivity() {
 
-    private val logTag = EarthquakeActivity::class.java.simpleName
+    //private val logTag = EarthquakeActivity::class.java.simpleName
     private var earthQuakes: ArrayList<Earthquake>? = null
     private var queryUtilsObject: QueryUtils? = null
 
