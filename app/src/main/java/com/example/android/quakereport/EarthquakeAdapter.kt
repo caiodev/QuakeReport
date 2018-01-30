@@ -83,7 +83,7 @@ class EarthquakeAdapter(context: Context, words: ArrayList<Earthquake>) :
         }
     }
 
-    fun returnColor(context: Context, color: Int): Int {
+    private fun returnColor(context: Context, color: Int): Int {
         return ContextCompat.getColor(context, color)
     }
 }
