@@ -69,17 +69,21 @@ class EarthquakeAdapter(context: Context, words: ArrayList<Earthquake>) :
 
         return when (magnitudeFloor) {
 
-            0 -> ContextCompat.getColor(context, R.color.magnitude1)
-            1 -> ContextCompat.getColor(context, R.color.magnitude1)
-            2 -> ContextCompat.getColor(context, R.color.magnitude2)
-            3 -> ContextCompat.getColor(context, R.color.magnitude3)
-            4 -> ContextCompat.getColor(context, R.color.magnitude4)
-            5 -> ContextCompat.getColor(context, R.color.magnitude5)
-            6 -> ContextCompat.getColor(context, R.color.magnitude6)
-            7 -> ContextCompat.getColor(context, R.color.magnitude7)
-            8 -> ContextCompat.getColor(context, R.color.magnitude8)
-            9 -> ContextCompat.getColor(context, R.color.magnitude9)
-            else -> ContextCompat.getColor(context, R.color.magnitude10plus)
+            0 -> returnColor(context, R.color.magnitude1)
+            1 -> returnColor(context, R.color.magnitude1)
+            2 -> returnColor(context, R.color.magnitude2)
+            3 -> returnColor(context, R.color.magnitude3)
+            4 -> returnColor(context, R.color.magnitude4)
+            5 -> returnColor(context, R.color.magnitude5)
+            6 -> returnColor(context, R.color.magnitude6)
+            7 -> returnColor(context, R.color.magnitude7)
+            8 -> returnColor(context, R.color.magnitude8)
+            9 -> returnColor(context, R.color.magnitude9)
+            else -> returnColor(context, R.color.magnitude10plus)
         }
+    }
+
+    fun returnColor(context: Context, color: Int): Int {
+        return ContextCompat.getColor(context, color)
     }
 }
