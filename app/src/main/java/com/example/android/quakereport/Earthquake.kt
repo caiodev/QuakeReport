@@ -5,8 +5,8 @@ package com.example.android.quakereport
  */
 
 data class Earthquake(val magnitude: Double?, val nearOf: String, val location: String?,
-                      val date: String?, val time: String?) {
+                      val date: String?, val time: String?, val url: String?) {
 
-    constructor(magnitude: Double?, location: String?, date: String?, time: String?) :
-            this(magnitude, "", location, date, time)
+    constructor(magnitude: Double?, location: String?, date: String?, time: String?, url: String?) :
+            this(magnitude, "", location, date, time, url)
 }

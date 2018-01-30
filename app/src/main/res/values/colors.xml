@@ -9,6 +9,12 @@
 
     <color name="black">#000000</color>
 
+    <!-- Cor do texto para os detalhes do terremoto no item de lista -->
+    <color name="textColorEarthquakeDetails">#B4BAC0</color>
+
+    <!-- Cor do texto para a localização primária do terremoto no item de lista -->
+    <color name="textColorEarthquakeLocation">#2B3D4D</color>
+
     <!-- Cor para um terremoto com magnitude 0 e 2 -->
     <color name="magnitude1">#4A7BA7</color>
 

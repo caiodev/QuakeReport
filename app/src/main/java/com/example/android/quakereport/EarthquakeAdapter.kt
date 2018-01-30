@@ -14,7 +14,6 @@ import java.util.*
 /**
  * Created by unknown on 02/01/18
  */
-
 class EarthquakeAdapter(context: Context, words: ArrayList<Earthquake>) :
         ArrayAdapter<Earthquake>(context, 0, words) {
 
@@ -66,24 +65,21 @@ class EarthquakeAdapter(context: Context, words: ArrayList<Earthquake>) :
 
     private fun getMagnitudeColor(magnitude: Double?): Int {
 
-        val magnitudeColorResourceId: Int
         val magnitudeFloor = Math.floor(magnitude!!.toDouble()).toInt()
 
-        when (magnitudeFloor) {
+        return when (magnitudeFloor) {
 
-            0 -> magnitudeColorResourceId = R.color.magnitude1
-            1 -> magnitudeColorResourceId = R.color.magnitude1
-            2 -> magnitudeColorResourceId = R.color.magnitude2
-            3 -> magnitudeColorResourceId = R.color.magnitude3
-            4 -> magnitudeColorResourceId = R.color.magnitude4
-            5 -> magnitudeColorResourceId = R.color.magnitude5
-            6 -> magnitudeColorResourceId = R.color.magnitude6
-            7 -> magnitudeColorResourceId = R.color.magnitude7
-            8 -> magnitudeColorResourceId = R.color.magnitude8
-            9 -> magnitudeColorResourceId = R.color.magnitude9
-            else -> magnitudeColorResourceId = R.color.magnitude10plus
+            0 -> ContextCompat.getColor(context, R.color.magnitude1)
+            1 -> ContextCompat.getColor(context, R.color.magnitude1)
+            2 -> ContextCompat.getColor(context, R.color.magnitude2)
+            3 -> ContextCompat.getColor(context, R.color.magnitude3)
+            4 -> ContextCompat.getColor(context, R.color.magnitude4)
+            5 -> ContextCompat.getColor(context, R.color.magnitude5)
+            6 -> ContextCompat.getColor(context, R.color.magnitude6)
+            7 -> ContextCompat.getColor(context, R.color.magnitude7)
+            8 -> ContextCompat.getColor(context, R.color.magnitude8)
+            9 -> ContextCompat.getColor(context, R.color.magnitude9)
+            else -> ContextCompat.getColor(context, R.color.magnitude10plus)
         }
-
-        return ContextCompat.getColor(context, magnitudeColorResourceId)
     }
 }

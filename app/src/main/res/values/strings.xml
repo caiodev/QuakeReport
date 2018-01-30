@@ -6,4 +6,10 @@
     <string name="earthquake_without_nearby_information_message">Unknown nearby</string>
     <string name="of"> of</string>
 
+    <!--Example data section-->
+    <string name="magnitude">8.1</string>
+    <string name="location">San andreas, California</string>
+    <string name="date">24/01/2018</string>
+    <string name="time">3:00 PM</string>
+
 </resources>
