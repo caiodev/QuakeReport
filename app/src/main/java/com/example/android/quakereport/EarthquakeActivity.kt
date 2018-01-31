@@ -30,11 +30,9 @@ class EarthquakeActivity : AppCompatActivity() {
 
             // Find the current earthquake that was clicked
             // Convert the String URL into an URI Object (To pass it on the Intent constructor)
-            val earthquakeUri = Uri.parse(earthQuakeAdapter.getItem(position).url)
-
             // Create a new Intent to visualize the earthquake URI
             // Send the Intent to launch a new Activity
-            startActivity(Intent(Intent.ACTION_VIEW, earthquakeUri))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(earthQuakeAdapter.getItem(position).url)))
         }
     }
 }
