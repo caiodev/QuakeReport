@@ -7,10 +7,8 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.AdapterView
 import kotlinx.android.synthetic.main.earthquake_activity.*
 
-
 class EarthquakeActivity : AppCompatActivity() {
 
-    //private val logTag = EarthquakeActivity::class.java.simpleName
     private var earthQuakes: ArrayList<Earthquake>? = null
     private var queryUtilsObject: QueryUtils? = null
 
@@ -20,7 +18,7 @@ class EarthquakeActivity : AppCompatActivity() {
 
         earthQuakes = ArrayList()
 
-        // Cria uma lista falsa de earthquakes
+        // A fake earthquake list is created
         queryUtilsObject = QueryUtils()
         earthQuakes = queryUtilsObject!!.extractEarthquakes()
 
@@ -30,12 +28,12 @@ class EarthquakeActivity : AppCompatActivity() {
 
         mainEarthquakeListView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
 
-            // Achar o terremoto atual que foi clicado
-            // Converte o URL String em um objeto URI (para passar no construtor de Intent)
+            // Find the current earthquake that was clicked
+            // Convert the String URL into an URI Object (To pass it on the Intent constructor)
             val earthquakeUri = Uri.parse(earthQuakeAdapter.getItem(position).url)
 
-            // Cria um novo intent para visualizar a URI do earthquake
-            // Envia o intent para lançar uma nova activity
+            // Create a new Intent to visualize the earthquake URI
+            // Send the Intent to launch a new Activity
             startActivity(Intent(Intent.ACTION_VIEW, earthquakeUri))
         }
     }

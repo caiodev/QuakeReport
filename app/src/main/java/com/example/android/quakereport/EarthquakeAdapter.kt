@@ -36,13 +36,13 @@ class EarthquakeAdapter(context: Context, words: ArrayList<Earthquake>) :
 
         magnitudeTextView.text = DecimalFormat("0.0").format(currentEarthquakeValue.magnitude)
 
-        // Obtenha a cor de fundo apropriada, baseada na magnitude do terremoto atual
+        // magnitudeCircle obtains the right background color based on the current earthquake magnitude
         val magnitudeCircle = magnitudeTextView.background as GradientDrawable
 
-        // Busque o fundo do TextView, que é um GradientDrawable
+        // magnitudeColor obtains the background color TextView, que é um GradientDrawable
         val magnitudeColor = getMagnitudeColor(currentEarthquakeValue.magnitude)
 
-        // Configure a cor no círculo de magnitude
+        // Here, the magnitude circle color is set
         magnitudeCircle.setColor(magnitudeColor)
 
         if (currentEarthquakeValue.nearOf != "") {
