@@ -18,6 +18,8 @@ class EarthquakeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.earthquake_activity)
 
+        hideProgressBar()
+
         queryUtils = QueryUtils()
 
         earthQuakeAdapter = EarthquakeAdapter(applicationContext!!, ArrayList())
@@ -36,9 +38,19 @@ class EarthquakeActivity : AppCompatActivity() {
         }
     }
 
+    private fun showProgressBar() {
+        progressBar.show()
+    }
+
+    private fun hideProgressBar() {
+        progressBar.hide()
+    }
+
     inner class EarthquakeAsyncTask : AsyncTask<String, Void, List<Earthquake>>() {
 
         override fun doInBackground(vararg params: String?): List<Earthquake>? {
+
+            showProgressBar()
 
             return if (params.isEmpty() || params[0] == null) {
                 null
@@ -58,6 +70,8 @@ class EarthquakeActivity : AppCompatActivity() {
             if (!result.isEmpty()) {
                 earthQuakeAdapter?.addAll(result)
             }
+
+            hideProgressBar()
         }
     }
 }

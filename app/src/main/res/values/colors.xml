@@ -1,48 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--Primary color-->
     <color name="colorPrimary">#2B3D4D</color>
-
+    <!--Primary color dark-->
     <color name="colorPrimaryDark">#23303D</color>
-
+    <!--Color accent-->
     <color name="colorAccent">#10CAC9</color>
 
+    <!--Font color-->
     <color name="black">#000000</color>
 
-    <!-- Cor do texto para os detalhes do terremoto no item de lista -->
+    <color name="progress_bar_color">#00C78C</color>
+
+    <!-- Earthquake detail on the list -->
     <color name="textColorEarthquakeDetails">#B4BAC0</color>
 
-    <!-- Cor do texto para a localização primária do terremoto no item de lista -->
+    <!-- Earthquake primary location on the list -->
     <color name="textColorEarthquakeLocation">#2B3D4D</color>
 
-    <!-- Cor para um terremoto com magnitude 0 e 2 -->
+    <!-- Color for earthquake magnitudes between 0 and 2 -->
     <color name="magnitude1">#4A7BA7</color>
 
-    <!-- Cor para um terremoto com magnitude entre 2 e 3 -->
+    <!-- Color for earthquake magnitudes between 2 and 3 -->
     <color name="magnitude2">#04B4B3</color>
 
-    <!-- Cor para um terremoto com magnitude entre 3 e 4 -->
+    <!-- Color for earthquake magnitudes between 3 and 4 -->
     <color name="magnitude3">#10CAC9</color>
 
-    <!-- Cor para um terremoto com magnitude entre 4 e 5 -->
+    <!-- Color for earthquake magnitudes between 4 and 5 -->
     <color name="magnitude4">#F5A623</color>
 
-    <!-- Cor para um terremoto com magnitude entre 5 e 6 -->
+    <!-- Color for earthquake magnitudes between 5 and 6 -->
     <color name="magnitude5">#FF7D50</color>
 
-    <!-- Cor para um terremoto com magnitude entre 6 e 7 -->
+    <!-- Color for earthquake magnitudes between 6 and 7 -->
     <color name="magnitude6">#FC6644</color>
 
-    <!-- Cor para um terremoto com magnitude entre 7 e 8 -->
+    <!-- Color for earthquake magnitudes between 7 and 8 -->
     <color name="magnitude7">#E75F40</color>
 
-    <!-- Cor para um terremoto com magnitude entre 8 e 9 -->
+    <!-- Color for earthquake magnitudes between 8 and 9 -->
     <color name="magnitude8">#E13A20</color>
 
-    <!-- Cor para um terremoto com magnitude entre 9 e 10 -->
+    <!-- Color for earthquake magnitudes between 9 and 10 -->
     <color name="magnitude9">#D93218</color>
 
-    <!-- Cor para um terremoto com magnitude acima de 10 -->
+    <!-- Color for earthquake magnitudes bigger than 10 -->
     <color name="magnitude10plus">#C03823</color>
 
 </resources>
