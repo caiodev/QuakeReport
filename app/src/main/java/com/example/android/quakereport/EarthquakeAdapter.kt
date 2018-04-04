@@ -9,12 +9,11 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.earth_quake_item_view_layout.view.*
 import java.text.DecimalFormat
-import java.util.*
 
 /**
  * Created by unknown on 02/01/18
  */
-class EarthquakeAdapter(context: Context, words: ArrayList<Earthquake>) :
+class EarthquakeAdapter(context: Context, words: List<Earthquake>) :
         ArrayAdapter<Earthquake>(context, 0, words) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
