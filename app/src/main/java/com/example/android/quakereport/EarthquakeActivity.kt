@@ -12,7 +12,7 @@ class EarthquakeActivity : AppCompatActivity() {
 
     private var queryUtils: QueryUtils? = null
     private var earthQuakeAdapter: EarthquakeAdapter? = null
-    private var requestUrl = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=6&limit=10"
+    private val requestUrl = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=6&limit=10"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class EarthquakeActivity : AppCompatActivity() {
         val earthquakeAsyncTask = EarthquakeAsyncTask()
         earthquakeAsyncTask.execute(requestUrl)
 
-        //ClickListener
+        //OnItemClickListener
         mainEarthquakeListView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
 
             // Find the current earthquake that was clicked
@@ -62,11 +62,11 @@ class EarthquakeActivity : AppCompatActivity() {
 
             EarthquakeAdapter(applicationContext, result)
 
-            // Limpa o adapter dos antigos dados de earthquake
+            // It clears old Earthquake data from the adapter
             earthQuakeAdapter?.clear()
 
-            // Se há uma lista válida de {@link Earthquake}s, então adiciona-os ao data set do adapter.
-            // Isso ativará a atualização da ListView.
+            // If there is a valid Earthquake list, add it to the adapter dataset
+            // This will activate the ListView update.
             if (!result.isEmpty()) {
                 earthQuakeAdapter?.addAll(result)
             }
