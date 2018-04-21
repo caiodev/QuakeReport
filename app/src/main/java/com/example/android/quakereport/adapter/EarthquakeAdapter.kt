@@ -1,4 +1,4 @@
-package com.example.android.quakereport
+package com.example.android.quakereport.adapter
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
@@ -7,14 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import com.example.android.quakereport.R
+import com.example.android.quakereport.model.Earthquake
 import kotlinx.android.synthetic.main.earth_quake_item_view_layout.view.*
 import java.text.DecimalFormat
 
 /**
  * Created by unknown on 02/01/18
  */
-class EarthquakeAdapter(context: Context, words: List<Earthquake>) :
-        ArrayAdapter<Earthquake>(context, 0, words) {
+class EarthquakeAdapter(context: Context, earthquakes: List<Earthquake>) :
+        ArrayAdapter<Earthquake>(context, 0, earthquakes) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
@@ -48,16 +50,14 @@ class EarthquakeAdapter(context: Context, words: List<Earthquake>) :
 
             nearOfTextView.text = context.getString(R.string.earth_quake_adapter_class_near_of_field_place_holder,
                     currentEarthquakeValue.nearOf, context.getString(R.string.of))
-            println(nearOfTextView.text)
 
         } else {
             nearOfTextView.text = context.getString(R.string.earthquake_without_nearby_information_message)
-            println(nearOfTextView.text)
         }
 
-        placeTextView.text = currentEarthquakeValue.location
-        dateTextView?.text = currentEarthquakeValue.date
-        timeTextView?.text = currentEarthquakeValue.time
+        placeTextView.text = currentEarthquakeValue.place
+        dateTextView.text = currentEarthquakeValue.date
+        timeTextView.text = currentEarthquakeValue.time
 
         return listItemView
     }

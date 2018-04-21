@@ -1,5 +1,6 @@
 package com.example.android.quakereport
 
+import com.example.android.quakereport.utils.QueryUtils
 import org.junit.Assert
 import org.junit.Test
 

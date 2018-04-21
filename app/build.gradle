@@ -4,8 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.3'
-
     defaultConfig {
         applicationId "com.example.android.quakereport"
         minSdkVersion 15
@@ -23,16 +21,17 @@ android {
 }
 
 ext {
-    appCompat = "27.1.0"
+    appCompat = "27.1.1"
     junit = "4.12"
     gson = "2.8.2"
     timber = "4.6.1"
-    constraintLayout = "1.0.2"
+    constraintLayout = "1.1.0"
     avLoadingIndicator = "2.1.3"
+    retrofit = "2.4.0"
+    retrofitConverterGson = "2.4.0"
 }
 
 dependencies {
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation "junit:junit:$junit"
     implementation "com.android.support:appcompat-v7:$appCompat"
@@ -41,6 +40,8 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$constraintLayout"
     implementation "com.jakewharton.timber:timber:$timber"
     implementation "com.wang.avi:library:$avLoadingIndicator"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitConverterGson"
 }
 
 repositories {
