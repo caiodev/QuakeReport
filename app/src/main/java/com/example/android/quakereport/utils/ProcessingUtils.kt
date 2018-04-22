@@ -1,24 +1,19 @@
 package com.example.android.quakereport.utils
 
-import android.content.Context
-import com.example.android.quakereport.adapter.EarthquakeAdapter
 import com.example.android.quakereport.model.Earthquake
 import com.example.android.quakereport.model.EarthquakeResponse
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Created by unknown on 07/01/18
  */
-class QueryUtils {
+class ProcessingUtils {
 
-    fun extractEarthquakes(earthquakes: EarthquakeResponse.Features?, context: Context,
-                           earthquakeAdapter: EarthquakeAdapter?) {
+    fun extractEarthquakes(earthquakes: EarthquakeResponse.Features?,
+                           earthquakeAdapterList: ArrayList<Earthquake>) : ArrayList<Earthquake> {
 
         if (earthquakes != null) {
-
-            val earthquakeAdapterList = ArrayList<Earthquake>()
 
             if (earthquakes.properties!!.place!!.contains("of")) {
 
@@ -37,18 +32,9 @@ class QueryUtils {
                         convertToDateOrTime(earthquakes.properties.time.toLong(), Constants.timeMask),
                         earthquakes.properties.url))
             }
-
-            EarthquakeAdapter(context, earthquakeAdapterList)
-
-            // It clears old Earthquake data from the adapter
-            earthquakeAdapter?.clear()
-
-            // If there is a valid Earthquake list, add it to the adapter dataset
-            // This will activate the ListView update.
-            if (!earthquakeAdapter!!.isEmpty) {
-                earthquakeAdapter.addAll(earthquakeAdapterList)
-            }
         }
+
+        return earthquakeAdapterList
     }
 
     private fun convertToDateOrTime(timeInSeconds: Long, outputMask: String): String {

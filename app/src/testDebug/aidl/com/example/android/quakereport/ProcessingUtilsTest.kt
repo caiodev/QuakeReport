@@ -1,6 +1,6 @@
 package com.example.android.quakereport
 
-import com.example.android.quakereport.utils.QueryUtils
+import com.example.android.quakereport.utils.ProcessingUtils
 import org.junit.Assert
 import org.junit.Test
 
@@ -8,9 +8,9 @@ import org.junit.Test
  * Created by unknown on 22/01/18
  */
 
-class QueryUtilsTest {
+class ProcessingUtilsTest {
 
-    val queryUtils = QueryUtils()
+    val queryUtils = ProcessingUtils()
 
     @Test
     fun extractEarthquakes() {

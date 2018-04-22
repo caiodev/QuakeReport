@@ -4,14 +4,20 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import android.widget.AdapterView
+import android.view.View
 import com.example.android.quakereport.R
-import com.example.android.quakereport.adapter.EarthquakeAdapter
+import com.example.android.quakereport.adapter.RecyclerViewAdapter
+import com.example.android.quakereport.model.Earthquake
 import com.example.android.quakereport.model.EarthquakeResponse
 import com.example.android.quakereport.rest.EarthquakeService
 import com.example.android.quakereport.utils.ApiUtils
-import com.example.android.quakereport.utils.QueryUtils
+import com.example.android.quakereport.utils.ClickListener
+import com.example.android.quakereport.utils.ProcessingUtils
+import com.example.android.quakereport.utils.RecyclerItemTouchListener
 import kotlinx.android.synthetic.main.earthquake_activity.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,40 +25,33 @@ import retrofit2.Response
 
 class EarthquakeActivity : AppCompatActivity() {
 
-    private var queryUtils: QueryUtils? = null
-    private var earthQuakeAdapter: EarthquakeAdapter? = null
+    private var processingUtils: ProcessingUtils? = null
     private var earthquakeService: EarthquakeService? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.earthquake_activity)
 
-        hideProgressBar()
+        showProgressBar()
 
-        queryUtils = QueryUtils()
-
+        processingUtils = ProcessingUtils()
         earthquakeService = ApiUtils().getEarthquakeService()
+
         loadResponseData()
-
-        earthQuakeAdapter = EarthquakeAdapter(applicationContext!!, ArrayList())
-        mainEarthquakeListView.adapter = earthQuakeAdapter
-
-        //OnItemClickListener
-        mainEarthquakeListView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-
-            // Find the current earthquake that was clicked
-            // Convert the String URL into an URI Object (To pass it on the Intent constructor)
-            // Create a new Intent to visualize the earthquake and send the Intent to launch a new Activity
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(earthQuakeAdapter!!.getItem(position).url)))
-        }
     }
 
     private fun loadResponseData() {
 
-        showProgressBar()
+        val earthquakeArrayList = ArrayList<Earthquake>()
+        val earthquakeAdapter = RecyclerViewAdapter(applicationContext, earthquakeArrayList)
+        mainEarthquakeRecyclerView.setHasFixedSize(true)
+        mainEarthquakeRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
+        mainEarthquakeRecyclerView.itemAnimator = DefaultItemAnimator()
+        mainEarthquakeRecyclerView.addItemDecoration(DividerItemDecoration(applicationContext, LinearLayoutManager.VERTICAL))
+        mainEarthquakeRecyclerView.adapter = earthquakeAdapter
 
         val queryMapParameters = HashMap<String, String>()
-        queryMapParameters["limit"] = "1"
+        queryMapParameters["limit"] = "10"
         queryMapParameters["minmag"] = "6"
         queryMapParameters["orderby"] = "time"
         queryMapParameters["eventtype"] = "earthquake"
@@ -62,10 +61,24 @@ class EarthquakeActivity : AppCompatActivity() {
             override fun onResponse(call: Call<EarthquakeResponse>, response: Response<EarthquakeResponse>) {
 
                 if (response.isSuccessful) {
-
                     for (features: EarthquakeResponse.Features in response.body()?.features!!) {
-                        QueryUtils().extractEarthquakes(features, applicationContext, earthQuakeAdapter)
+                        processingUtils?.extractEarthquakes(features, earthquakeArrayList)
                     }
+
+                    earthquakeAdapter.notifyDataSetChanged()
+
+                    //OnItemClickListener
+                    mainEarthquakeRecyclerView.addOnItemTouchListener(RecyclerItemTouchListener(applicationContext,
+                            mainEarthquakeRecyclerView, object : ClickListener {
+
+                        override fun onClick(view: View, position: Int) {
+                            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(earthquakeArrayList[position].url)))
+                        }
+
+                        override fun onLongClick(view: View, position: Int) {
+                            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        }
+                    }))
 
                     hideProgressBar()
 
