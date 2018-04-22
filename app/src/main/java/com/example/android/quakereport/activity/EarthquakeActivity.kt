@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.example.android.quakereport.R
 import com.example.android.quakereport.adapter.RecyclerViewAdapter
 import com.example.android.quakereport.model.Earthquake
@@ -45,9 +47,10 @@ class EarthquakeActivity : AppCompatActivity() {
         val earthquakeArrayList = ArrayList<Earthquake>()
         val earthquakeAdapter = RecyclerViewAdapter(applicationContext, earthquakeArrayList)
         mainEarthquakeRecyclerView.setHasFixedSize(true)
-        mainEarthquakeRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
+        mainEarthquakeRecyclerView.layoutManager = StaggeredGridLayoutManager(1, 1)
         mainEarthquakeRecyclerView.itemAnimator = DefaultItemAnimator()
-        mainEarthquakeRecyclerView.addItemDecoration(DividerItemDecoration(applicationContext, LinearLayoutManager.VERTICAL))
+        mainEarthquakeRecyclerView.addItemDecoration(DividerItemDecoration(applicationContext,
+                LinearLayoutManager.VERTICAL))
         mainEarthquakeRecyclerView.adapter = earthquakeAdapter
 
         val queryMapParameters = HashMap<String, String>()
@@ -76,7 +79,8 @@ class EarthquakeActivity : AppCompatActivity() {
                         }
 
                         override fun onLongClick(view: View, position: Int) {
-                            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                            Toast.makeText(applicationContext, earthquakeArrayList[position].place,
+                                    Toast.LENGTH_LONG).show()
                         }
                     }))
 
