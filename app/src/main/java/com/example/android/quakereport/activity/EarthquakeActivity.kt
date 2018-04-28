@@ -7,12 +7,10 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.StaggeredGridLayoutManager
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.android.quakereport.R
-import com.example.android.quakereport.adapter.RecyclerViewAdapter
+import com.example.android.quakereport.adapter.EarthquakeAdapter
 import com.example.android.quakereport.model.Earthquake
 import com.example.android.quakereport.model.EarthquakeResponse
 import com.example.android.quakereport.rest.EarthquakeService
@@ -24,6 +22,7 @@ import kotlinx.android.synthetic.main.earthquake_activity.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 class EarthquakeActivity : AppCompatActivity() {
 
@@ -45,9 +44,9 @@ class EarthquakeActivity : AppCompatActivity() {
     private fun loadResponseData() {
 
         val earthquakeArrayList = ArrayList<Earthquake>()
-        val earthquakeAdapter = RecyclerViewAdapter(applicationContext, earthquakeArrayList)
+        val earthquakeAdapter = EarthquakeAdapter(applicationContext, earthquakeArrayList)
         mainEarthquakeRecyclerView.setHasFixedSize(true)
-        mainEarthquakeRecyclerView.layoutManager = StaggeredGridLayoutManager(1, 1)
+        mainEarthquakeRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
         mainEarthquakeRecyclerView.itemAnimator = DefaultItemAnimator()
         mainEarthquakeRecyclerView.addItemDecoration(DividerItemDecoration(applicationContext,
                 LinearLayoutManager.VERTICAL))
@@ -55,7 +54,7 @@ class EarthquakeActivity : AppCompatActivity() {
 
         val queryMapParameters = HashMap<String, String>()
         queryMapParameters["limit"] = "10"
-        queryMapParameters["minmag"] = "6"
+        queryMapParameters["minmag"] = "5"
         queryMapParameters["orderby"] = "time"
         queryMapParameters["eventtype"] = "earthquake"
         queryMapParameters["format"] = "geojson"
@@ -88,14 +87,13 @@ class EarthquakeActivity : AppCompatActivity() {
 
                 } else {
                     hideProgressBar()
-                    val responseCode = response.code()
-                    println("Status code: $responseCode")
+                    Timber.d("Response code: %s", response.code())
                 }
             }
 
             override fun onFailure(call: Call<EarthquakeResponse>, t: Throwable) {
                 hideProgressBar()
-                Log.d("MainActivity", "error loading from API")
+                Timber.d("Error loading from API: %s", t.message)
             }
         })
     }
