@@ -120,9 +120,9 @@ class EarthquakeActivity : AppCompatActivity() {
         val id = item?.itemId
         if (id == R.id.action_settings) {
 
-            //Open a material dialog with the options
-            materialDialogCreator(R.layout.filters_dialog)
-            filterDialogLogic()
+            //Open a material dialog with options
+            //materialDialogCreator(R.layout.filters_dialog)
+            //filterDialogLogic()
             return true
         }
         return super.onOptionsItemSelected(item)
