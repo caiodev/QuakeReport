@@ -18,13 +18,13 @@ class EarthquakeAdapter(private val context: Context, private val earthquakes: A
 
     private var viewHolder: EarthquakeViewHolder? = null
 
-    inner class EarthquakeViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+    inner class EarthquakeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val magnitudeTextView: TextView? = itemView!!.magnitude
-        val nearOfTextView: TextView? = itemView!!.nearOf
-        val placeTextView: TextView? = itemView!!.place
-        val dateTextView: TextView? = itemView!!.date
-        val timeTextView: TextView? = itemView!!.time
+        val magnitudeTextView: TextView? = itemView.magnitude
+        val nearOfTextView: TextView? = itemView.nearOf
+        val placeTextView: TextView? = itemView.place
+        val dateTextView: TextView? = itemView.date
+        val timeTextView: TextView? = itemView.time
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EarthquakeViewHolder {
@@ -35,40 +35,49 @@ class EarthquakeAdapter(private val context: Context, private val earthquakes: A
     override fun onBindViewHolder(holder: EarthquakeViewHolder, position: Int) {
 
         viewHolder = holder
-        val earthquake = earthquakes?.get(viewHolder!!.adapterPosition)
 
-        if (earthquake != null && viewHolder != null) {
+        viewHolder?.let { nonNullableViewHolder ->
 
-            viewHolder!!.magnitudeTextView?.text = DecimalFormat("0.0").format(earthquake.magnitude)
+            val earthquake = earthquakes?.get(nonNullableViewHolder.adapterPosition)
 
-            // magnitudeCircle obtains the right background color based on the current earthquake magnitude
-            val magnitudeCircle = viewHolder!!.magnitudeTextView?.background as GradientDrawable
+            earthquake?.let {  nonNullableEarthquake ->
 
-            // magnitudeColor obtains the background color TextView, que é um GradientDrawable
-            val magnitudeColor = getMagnitudeColor(earthquake.magnitude)
+                nonNullableViewHolder.magnitudeTextView?.text = DecimalFormat("0.0").format(nonNullableEarthquake.magnitude)
 
-            // Here, the magnitude circle color is set
-            magnitudeCircle.setColor(magnitudeColor)
+                // magnitudeCircle obtains the right background color based on the current earthquake magnitude
+                val magnitudeCircle = nonNullableViewHolder.magnitudeTextView?.background as GradientDrawable
 
-            when {
-                earthquake.nearOf != "" -> viewHolder!!.nearOfTextView?.text = context.getString(R.string.earth_quake_adapter_class_near_of_field_place_holder,
-                        earthquake.nearOf, context.getString(R.string.of))
-                else -> viewHolder!!.nearOfTextView?.text = context.getString(R.string.earthquake_without_nearby_information_message)
+                // magnitudeColor obtains the background color TextView, que é um GradientDrawable
+                val magnitudeColor = getMagnitudeColor(nonNullableEarthquake.magnitude)
+
+                // Here, the magnitude circle color is set
+                magnitudeCircle.setColor(magnitudeColor)
+
+                when {
+                    nonNullableEarthquake.nearOf != "" -> nonNullableViewHolder.nearOfTextView?.text = context.getString(R.string.earth_quake_adapter_class_near_of_field_place_holder,
+                            nonNullableEarthquake.nearOf, context.getString(R.string.of))
+                    else -> nonNullableViewHolder.nearOfTextView?.text = context.getString(R.string.earthquake_without_nearby_information_message)
+                }
+
+                nonNullableViewHolder.placeTextView?.text = nonNullableEarthquake.place
+                nonNullableViewHolder.dateTextView?.text = nonNullableEarthquake.date
+                nonNullableViewHolder.timeTextView?.text = nonNullableEarthquake.time
             }
-
-            viewHolder!!.placeTextView?.text = earthquake.place
-            viewHolder!!.dateTextView?.text = earthquake.date
-            viewHolder!!.timeTextView?.text = earthquake.time
         }
     }
 
     override fun getItemCount(): Int {
-        return earthquakes!!.size
+
+        earthquakes?.size?.let { listSize ->
+            return listSize
+        }
+
+        return 0
     }
 
-    private fun getMagnitudeColor(magnitude: Double?): Int {
+    private fun getMagnitudeColor(magnitude: Double): Int {
 
-        val magnitudeFloor = Math.floor(magnitude!!.toDouble()).toInt()
+        val magnitudeFloor = Math.floor(magnitude).toInt()
 
         return when (magnitudeFloor) {
 

@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--Example data section-->
+    <string name="magnitude" translatable="false">8.1</string>
+    <string name="location" translatable="false">San andreas, California</string>
+    <string name="date" translatable="false">24/01/2018</string>
+    <string name="time" translatable="false">3:00 PM</string>
+
     <string name="app_name" translatable="false">Quake Report</string>
     <string name="earth_quake_adapter_class_near_of_field_place_holder" translatable="false">%s %s</string>
     <string name="earthquake_without_nearby_information_message">Unknown nearby</string>
-    <string name="of"> of</string>
-
-    <!--Example data section-->
-    <string name="magnitude">8.1</string>
-    <string name="location">San andreas, California</string>
-    <string name="date">24/01/2018</string>
-    <string name="time">3:00 PM</string>
+    <string name="of">of</string>
+    <string name="no_internet_connection_warning">There is no internet connection</string>
+    <string name="settings_menu_item">Settings</string>
+    <string name="filters_string">Filters</string>
+    <string name="magnitude_string">Magnitude</string>
+    <string name="time_string">Time</string>
+    <string name="choose_an_option_dialog_title">Choose an option</string>
+    <string name="magnitude_asc_category">Magnitude (Asc)</string>
+    <string name="magnitude_desc_category">Magnitude (Desc)</string>
+    <string name="magnitude_specific_value_category">Magnitude (Specific value)</string>
+    <string name="magnitude_range_category">Magnitude (Range)</string>
+    <string name="settings_title">Earthquake data settings</string>
 
 </resources>

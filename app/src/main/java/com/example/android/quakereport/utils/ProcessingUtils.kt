@@ -1,36 +1,46 @@
 package com.example.android.quakereport.utils
 
 import com.example.android.quakereport.model.Earthquake
-import com.example.android.quakereport.model.EarthquakeResponse
+import com.example.android.quakereport.model.Features
 import java.text.SimpleDateFormat
 import java.util.*
 
 /**
  * Created by unknown on 07/01/18
  */
+
 class ProcessingUtils {
 
-    fun extractEarthquakes(earthquakes: EarthquakeResponse.Features?,
-                           earthquakeAdapterList: ArrayList<Earthquake>) : ArrayList<Earthquake> {
+    fun extractEarthquakes(features: Features?,
+                           earthquakeAdapterList: ArrayList<Earthquake>): ArrayList<Earthquake> {
 
-        if (earthquakes != null) {
+        features?.properties?.let { nonNullableProperties ->
 
-            if (earthquakes.properties!!.place!!.contains("of")) {
+            if (nonNullableProperties.earthquakePlace != null &&
+                    nonNullableProperties.earthquakeMagnitude != null &&
+                    nonNullableProperties.earthquakeTime != null) {
 
-                val parts = earthquakes.properties.place!!.split(" of ".toRegex()).dropLastWhile {
-                    it.isEmpty()
-                }.toTypedArray()
+                if (nonNullableProperties.earthquakePlace.contains("of")) {
 
-                earthquakeAdapterList.add(Earthquake(earthquakes.properties.mag!!.toDouble(), parts[0], parts[1],
-                        convertToDateOrTime(earthquakes.properties.time!!.toLong(), Constants.dateMask),
-                        convertToDateOrTime(earthquakes.properties.time.toLong(), Constants.timeMask),
-                        earthquakes.properties.url))
+                    val parts = nonNullableProperties.earthquakePlace.split(" of ".toRegex())
+                            .dropLastWhile { it.isEmpty() }.toTypedArray()
 
-            } else {
-                earthquakeAdapterList.add(Earthquake(earthquakes.properties.mag!!.toDouble(), earthquakes.properties.place,
-                        convertToDateOrTime(earthquakes.properties.time!!.toLong(), Constants.dateMask),
-                        convertToDateOrTime(earthquakes.properties.time.toLong(), Constants.timeMask),
-                        earthquakes.properties.url))
+                    earthquakeAdapterList.add(Earthquake(nonNullableProperties.earthquakeMagnitude.toDouble(),
+                            parts[0], parts[1],
+                            convertToDateOrTime(nonNullableProperties.earthquakeTime.toLong(), Constants.dateMask),
+                            convertToDateOrTime(nonNullableProperties.earthquakeTime.toLong(), Constants.timeMask),
+                            nonNullableProperties.earthquakeUrl ?: ""))
+
+                } else {
+
+                    earthquakeAdapterList.add(Earthquake(nonNullableProperties.earthquakeMagnitude.toDouble(),
+                            nonNullableProperties.earthquakePlace,
+                            convertToDateOrTime(nonNullableProperties.earthquakeTime.toLong(),
+                                    Constants.dateMask),
+                            convertToDateOrTime(nonNullableProperties.earthquakeTime.toLong(),
+                                    Constants.timeMask),
+                            nonNullableProperties.earthquakeUrl ?: ""))
+                }
             }
         }
 

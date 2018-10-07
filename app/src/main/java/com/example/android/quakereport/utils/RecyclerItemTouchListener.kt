@@ -15,27 +15,29 @@ class RecyclerItemTouchListener(context: Context, recyclerView: RecyclerView?,
         }
 
         override fun onLongPress(e: MotionEvent) {
-            val child = recyclerView?.findChildViewUnder(e.x, e.y)
-            if (child != null) {
+            recyclerView?.findChildViewUnder(e.x, e.y)?.let { child ->
                 clickListener.onLongClick(child, recyclerView.getChildLayoutPosition(child))
             }
         }
     })
 
-    override fun onTouchEvent(rv: RecyclerView?, e: MotionEvent?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onTouchEvent(p0: RecyclerView, p1: MotionEvent) {
+
     }
 
-    override fun onInterceptTouchEvent(rv: RecyclerView?, e: MotionEvent?): Boolean {
+    override fun onInterceptTouchEvent(recyclerView: RecyclerView, motionEvent: MotionEvent): Boolean {
 
-        val child = rv?.findChildViewUnder(e!!.x, e.y)
-        if (child != null && gestureDetector.onTouchEvent(e)) {
-            clickListener.onClick(child, rv.getChildLayoutPosition(child))
+        recyclerView.findChildViewUnder(motionEvent.x, motionEvent.y)?.let { child ->
+
+            if (gestureDetector.onTouchEvent(motionEvent)) {
+                clickListener.onClick(child, recyclerView.getChildLayoutPosition(child))
+            }
         }
+
         return false
     }
 
     override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 }

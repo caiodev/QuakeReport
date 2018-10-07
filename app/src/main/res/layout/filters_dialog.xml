@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/dialog_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filters_string"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/white" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/magnitudeFilters"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableLeft="@mipmap/ic_earthquake"
+        android:drawablePadding="8dp"
+        android:drawableStart="@mipmap/ic_earthquake"
+        android:focusable="true"
+        android:paddingBottom="8dp"
+        android:paddingEnd="14dp"
+        android:paddingLeft="14dp"
+        android:paddingStart="14dp"
+        android:paddingTop="8dp"
+        android:text="@string/magnitude_string"
+        android:textAppearance="?android:textAppearanceLarge"
+        app:layout_constraintBottom_toTopOf="@+id/divider_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_toolbar" />
+
+    <View
+        android:id="@+id/divider_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginStart="12dp"
+        android:background="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/magnitudeFilters" />
+
+    <TextView
+        android:id="@+id/timeFilters"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableLeft="@mipmap/ic_time"
+        android:drawablePadding="8dp"
+        android:drawableStart="@mipmap/ic_time"
+        android:focusable="true"
+        android:paddingBottom="8dp"
+        android:paddingEnd="14dp"
+        android:paddingLeft="14dp"
+        android:paddingStart="14dp"
+        android:paddingTop="8dp"
+        android:text="@string/time_string"
+        android:textAppearance="?android:textAppearanceLarge"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider_view" />
+
+</android.support.constraint.ConstraintLayout>

@@ -3,9 +3,9 @@ package com.example.android.quakereport.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class EarthquakeResponse {
+class Features {
 
-    @SerializedName("features")
+    @SerializedName("properties")
     @Expose
-    val features: List<Features>? = null
+    val properties: Properties? = null
 }

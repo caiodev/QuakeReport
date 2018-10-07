@@ -2,4 +2,16 @@
 <resources>
     <string name="earthquake_without_nearby_information_message">Proximidades desconhecidas</string>
     <string name="of">de</string>
+    <string name="no_internet_connection_warning">Não há conexão com a internet</string>
+    <string name="settings_menu_item">Configurações</string>
+    <string name="settings_title">Configurações dos dados do(s) terremoto(s)</string>
+    <string name="filters_string">Filtros</string>
+    <string name="magnitude_string">Por magnitude</string>
+    <string name="time_string">Por tempo</string>
+    <string name="choose_an_option_dialog_title">Escolha uma opção</string>
+    <string name="magnitude_asc_category">Magnitude (Do menor para o maior)</string>
+    <string name="magnitude_desc_category">Magnitude (Do maior para o menor)</string>
+    <string name="magnitude_range_category">Magnitude (Intervalo entre magnitudes)</string>
+    <string name="magnitude_specific_value_category">Magnitude (Valor específico)</string>
+
 </resources>

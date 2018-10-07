@@ -6,7 +6,9 @@
     <!--Primary color dark-->
     <color name="colorPrimaryDark">#23303D</color>
     <!--Color accent-->
-    <color name="colorAccent">#10CAC9</color>
+    <color name="colorAccent">#1A237E</color>
+
+    <color name="white">#FFFFFF</color>
 
     <!--Font color-->
     <color name="black">#000000</color>
@@ -48,5 +50,6 @@
 
     <!-- Color for earthquake magnitudes bigger than 10 -->
     <color name="magnitude10plus">#C03823</color>
+    <color name="range_bar_pin_color">@color/colorAccent</color>
 
 </resources>
